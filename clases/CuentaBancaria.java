@@ -33,6 +33,10 @@ public class CuentaBancaria {
     return saldo;
   }
 
+  public void setSaldo(double saldo) {
+    this.saldo = saldo;
+  }
+
   public Persona getTitular() {
     return titular;
   }
@@ -49,4 +53,34 @@ public class CuentaBancaria {
     this.numeroCuenta = numeroCuenta;
   }
 
+  public void depositar(double monto) {
+    this.saldo += monto;
+    System.out.println("Deposito de: " + monto + " realizado con exito");
+    System.out.println("Saldo actualizado a: $" + getSaldo());
+  }
+
+  public void retirar(double monto) {
+    if (monto > 0 && this.saldo >= monto) {
+      this.saldo -= monto;
+      System.out.println("Dinero retirado " + monto + " pesos");
+      System.out.println("Su nuevo saldo es: $ " + getSaldo());
+    } else {
+      System.out.println("Fondos insuficientes");
+    }
+  }
+
+  public void despliegaInformacion() {
+    System.out.println("\n----------------Datos de la cuenta----------------");
+    System.out.println("Numero de cuenta: " + this.numeroCuenta);
+    System.out.println("Saldo de la cuenta: " + this.saldo);
+    System.out.println("Titular de la cuenta: " + this.titular.getNombre());
+    System.out.println("-----------------------------------------------------");
+  }
+
+  public static void imprimeInformacionDeTodasLasCuentas() {
+    System.out.println("Informacion de todas las cuentas bancarias");
+    for (CuentaBancaria cuenta : listaDeCuentasBancarias) {
+      cuenta.despliegaInformacion();
+    }
+  }
 }
